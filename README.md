@@ -6,6 +6,8 @@ bash.
 
 ## Plugins
 
+- **[ver_cut][1]**: output version substrings
+- **[ver_rs][1]**: perform version string substitutions
 - **[ver_test][1]**: perform version comparisons
 
 ## Requirements
