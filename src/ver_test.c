@@ -14,7 +14,7 @@ static int ver_test_builtin(WORD_LIST *list)
     int	argc, ret;
 
     argv = make_builtin_argv(list, &argc);
-    // rust handles freeing argv
+    // pkgcraft handles freeing argv
     ret = ver_test(argc, argv);
 
     if (ret == -1) {
