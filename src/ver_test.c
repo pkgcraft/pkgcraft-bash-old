@@ -6,8 +6,6 @@
 
 #include <pkgcraft.h>
 
-extern char **make_builtin_argv ();
-
 static int ver_test_builtin(WORD_LIST *list)
 {
     char **argv;
