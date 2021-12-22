@@ -5,7 +5,6 @@ project(
   meson_version : '>= 0.50.0',
 )
 
-bash_prog = find_program('bash')
 bash = dependency('bash', version: '>= 5.0')
 bash_loadablesdir = bash.get_pkgconfig_variable('loadablesdir')
 

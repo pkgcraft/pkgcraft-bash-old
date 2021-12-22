@@ -6,6 +6,8 @@ shared_module(
   install : true,
 )
 
+bash = find_program('bash')
+
 test(
   'load ver_test plugin',
-  bash_prog, args : ['-c', 'enable -f ./src/ver_test.so ver_test && ver_test || exit 1'])
+  bash, args : ['-c', 'enable -f ./src/ver_test.so ver_test && ver_test 1 -lt 2 || exit 1'])
