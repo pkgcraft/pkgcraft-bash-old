@@ -39,6 +39,6 @@ struct builtin ver_cut_struct = {
     .function	= ver_cut_builtin,
     .flags	= BUILTIN_ENABLED,
     .long_doc	= ver_cut_doc,
-    .short_doc	= "ver_cut 1-2",
+    .short_doc	= "ver_cut 1-2 1.2.3",
     .handle	= NULL,
 };

@@ -40,6 +40,6 @@ struct builtin ver_test_struct = {
     .function	= ver_test_builtin,
     .flags	= BUILTIN_ENABLED,
     .long_doc	= ver_test_doc,
-    .short_doc	= "ver_test ${ver} -lt 2-r1",
+    .short_doc	= "ver_test 1 -lt 2-r1",
     .handle	= NULL,
 };

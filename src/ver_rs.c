@@ -39,6 +39,6 @@ struct builtin ver_rs_struct = {
     .function	= ver_rs_builtin,
     .flags	= BUILTIN_ENABLED,
     .long_doc	= ver_rs_doc,
-    .short_doc	= "ver_rs 2 -",
+    .short_doc	= "ver_rs 2 - 1.2.3",
     .handle	= NULL,
 };
