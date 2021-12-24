@@ -12,8 +12,8 @@ static int ver_test_builtin(WORD_LIST *list)
     int	argc, ret;
 
     argv = make_builtin_argv(list, &argc);
-    // pkgcraft handles freeing argv
-    ret = ver_test(argc, argv);
+    ret = ver_test(argc, &argv);
+    free(argv);
 
     if (ret == -1) {
 	char *err = last_error_message();
