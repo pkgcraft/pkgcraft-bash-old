@@ -18,8 +18,8 @@ static int ver_test_builtin(WORD_LIST *list)
     if (ret == -1) {
 	char *err = last_error_message();
 	if (err != NULL) {
-	    printf("ver_test: error: %s\n", err);
-	    free(err);
+	    fprintf(stderr, "ver_test: error: %s\n", err);
+	    error_message_free(err);
 	}
 	exit(ret);
     }
