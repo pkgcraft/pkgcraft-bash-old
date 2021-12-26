@@ -1,17 +1,8 @@
-shared_module(
-  'ver_test', 'ver_test.c',
-  dependencies : [bash, pkgcraft], name_prefix : '', install : true,
-)
+plugins = ['ver_cut', 'ver_rs', 'ver_test']
 
-shared_module(
-  'ver_rs', 'ver_rs.c',
-  dependencies : [bash, pkgcraft], name_prefix : '', install : true,
-)
-
-shared_module(
-  'ver_cut', 'ver_cut.c',
-  dependencies : [bash, pkgcraft], name_prefix : '', install : true,
-)
+foreach name : plugins
+  shared_module(name, f'@name@.c', dependencies : [bash, pkgcraft], name_prefix : '', install : true)
+endforeach
 
 bash = find_program('bash')
 

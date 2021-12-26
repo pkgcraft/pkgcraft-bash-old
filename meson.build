@@ -2,11 +2,11 @@ project(
   'pkgcraft-bash', 'c',
   version : '0.0.1',
   license : 'GPL-3',
-  meson_version : '>= 0.50.0',
+  meson_version : '>= 0.58.0',
 )
 
 bash = dependency('bash', version: '>= 5.0')
-bash_loadablesdir = bash.get_pkgconfig_variable('loadablesdir')
+bash_loadablesdir = bash.get_variable(pkgconfig : 'loadablesdir')
 
 pkgcraft = dependency('pkgcraft', version: '>= 0.0.1')
 
