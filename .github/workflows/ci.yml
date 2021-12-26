@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches-ignore: [deploy]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        rust-version: ['1.56.0', 'stable']
+
+    steps:
+    - name: Checkout pkgcraft
+      uses: actions/checkout@v2
+      with:
+        repository: pkgcraft/pkgcraft
+        path: pkgcraft
+
+    - name: Checkout pkgcraft-c
+      uses: actions/checkout@v2
+      with:
+        repository: pkgcraft/pkgcraft-c
+        path: pkgcraft-c
+
+    - name: Move repos into expected locations
+      run: mv pkgcraft pkgcraft-c ../
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up rust toolchain ${{ matrix.rust-version }}
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: ${{ matrix.rust-version }}
+        profile: minimal
+        override: true
+        components: rustfmt
+
+    - name: Set up rust cache
+      uses: Swatinem/rust-cache@v1
+      with:
+        working-directory: ../pkgcraft-c
+        cache-on-failure: true
+
+    - name: Install cargo-c
+      run: cargo install cargo-c
+
+    - name: Build C library
+      run: cargo cinstall --prefix=${PWD}/pkgcraft --pkgconfigdir=${PWD}/pkgcraft --manifest-path=../pkgcraft-c/Cargo.toml
+
+    - name: Install meson
+      run: pip install meson
+
+    - name: Install ninja and bash plugin support
+      run: |
+        sudo apt update
+        sudo apt install -y ninja-build bash-builtins
+
+    - name: Build bash plugins
+      run: |
+        export PKG_CONFIG_PATH=pkgcraft
+        meson setup build
+        meson compile -C build -v
