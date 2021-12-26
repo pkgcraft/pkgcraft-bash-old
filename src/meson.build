@@ -1,4 +1,4 @@
-plugins = ['ver_cut', 'ver_rs', 'ver_test']
+plugins = ['has', 'ver_cut', 'ver_rs', 'ver_test']
 
 foreach name : plugins
   shared_module(name, f'@name@.c', dependencies : [bash, pkgcraft], name_prefix : '', install : true)
