@@ -28,16 +28,13 @@ To build pkgcraft-bash, run the following commands:
     git clone https://github.com/pkgcraft/pkgcraft-c.git
     git clone https://github.com/pkgcraft/pkgcraft-bash.git
 
-    # build pkgcraft-c
-    cd pkgcraft-c
-    cargo cbuild
+    cd pkgcraft-bash
 
-    # create library symlink with expected name -- note that the target triplet may be different
-    ln -rs target/x86_64-unknown-linux-gnu/debug/libpkgcraft.so target/x86_64-unknown-linux-gnu/debug/libpkgcraft.so.0
+    # build and install pkgcraft-c
+    cargo cinstall --prefix="${PWD}/pkgcraft" --pkgconfigdir="${PWD}/pkgcraft" --manifest-path=../pkgcraft-c/Cargo.toml
 
     # build pkgcraft-bash
-    cd ../pkgcraft-bash
-    export PKG_CONFIG_PATH=../pkgcraft-c/target/x86_64-unknown-linux-gnu/debug
+    export PKG_CONFIG_PATH=pkgcraft
     meson setup build && meson compile -C build -v
 
     # bash plugin loading example
