@@ -9,7 +9,7 @@
 static int ver_test_builtin(WORD_LIST *list)
 {
     char **argv;
-    int	argc, ret;
+    int argc, ret;
 
     argv = make_builtin_argv(list, &argc);
     ret = ver_test(argc, &argv);

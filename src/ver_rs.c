@@ -9,7 +9,7 @@
 static int ver_rs_builtin(WORD_LIST *list)
 {
     char **argv;
-    int	argc, ret;
+    int argc, ret;
 
     argv = make_builtin_argv(list, &argc);
     ret = ver_rs(argc, &argv);
