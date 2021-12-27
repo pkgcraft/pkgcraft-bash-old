@@ -8,12 +8,12 @@
 
 static int has_builtin(WORD_LIST *list)
 {
-    char **argv;
-    int argc, ret;
+    char **args;
+    int args_len, ret;
 
-    argv = make_builtin_argv(list, &argc);
-    ret = has(argc, &argv);
-    free(argv);
+    args = strvec_from_word_list(list, 0, 0, &args_len);
+    ret = has(&args, args_len);
+    free(args);
 
     if (ret == -1) {
 	char *err = last_error_message();

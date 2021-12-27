@@ -8,13 +8,13 @@
 
 static int ver_rs_builtin(WORD_LIST *list)
 {
-    char **argv;
+    char **args;
     char *PV = get_string_value("PV");
-    int argc, ret;
+    int args_len, ret;
 
-    argv = make_builtin_argv(list, &argc);
-    ret = ver_rs(argc, &argv, &PV);
-    free(argv);
+    args = strvec_from_word_list(list, 0, 0, &args_len);
+    ret = ver_rs(&args, args_len, &PV);
+    free(args);
 
     if (ret == -1) {
 	char *err = last_error_message();
