@@ -12,14 +12,14 @@ static int has_builtin(WORD_LIST *list)
     int args_len, ret;
 
     args = strvec_from_word_list(list, 0, 0, &args_len);
-    ret = has(&args, args_len);
+    ret = pkgcraft_has(&args, args_len);
     free(args);
 
     if (ret == -1) {
-	char *err = last_error_message();
+	char *err = pkgcraft_last_error();
 	if (err != NULL) {
 	    fprintf(stderr, "has: error: %s\n", err);
-	    error_message_free(err);
+	    pkgcraft_free_str(err);
 	}
 	exit(ret);
     }

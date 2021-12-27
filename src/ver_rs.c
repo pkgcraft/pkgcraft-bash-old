@@ -13,14 +13,14 @@ static int ver_rs_builtin(WORD_LIST *list)
     int args_len, ret;
 
     args = strvec_from_word_list(list, 0, 0, &args_len);
-    ret = ver_rs(&args, args_len, &PV);
+    ret = pkgcraft_ver_rs(&args, args_len, &PV);
     free(args);
 
     if (ret == -1) {
-	char *err = last_error_message();
+	char *err = pkgcraft_last_error();
 	if (err != NULL) {
 	    fprintf(stderr, "ver_rs: error: %s\n", err);
-	    error_message_free(err);
+	    pkgcraft_free_str(err);
 	}
 	exit(ret);
     }
