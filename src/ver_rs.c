@@ -9,10 +9,11 @@
 static int ver_rs_builtin(WORD_LIST *list)
 {
     char **argv;
+    char *PV = get_string_value("PV");
     int argc, ret;
 
     argv = make_builtin_argv(list, &argc);
-    ret = ver_rs(argc, &argv);
+    ret = ver_rs(argc, &argv, &PV);
     free(argv);
 
     if (ret == -1) {
