@@ -9,10 +9,11 @@
 static int ver_test_builtin(WORD_LIST *list)
 {
     char **argv;
+    char *PVR = get_string_value("PVR");
     int argc, ret;
 
     argv = make_builtin_argv(list, &argc);
-    ret = ver_test(argc, &argv);
+    ret = ver_test(argc, &argv, &PVR);
     free(argv);
 
     if (ret == -1) {

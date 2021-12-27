@@ -9,10 +9,11 @@
 static int ver_cut_builtin(WORD_LIST *list)
 {
     char **argv;
+    char *PV = get_string_value("PV");
     int argc, ret;
 
     argv = make_builtin_argv(list, &argc);
-    ret = ver_cut(argc, &argv);
+    ret = ver_cut(argc, &argv, &PV);
     free(argv);
 
     if (ret == -1) {
