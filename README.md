@@ -2,13 +2,15 @@
 
 Various bash plugins that leverage pkgcraft's C API instead of being forced to
 maintain duplicate functionality such as version parsing and comparisons in
-bash.
+bash. The canonical definition for many of the plugins comes from the [Package
+Manager Specification][1] used by Gentoo.
 
 ## Plugins
 
-- **[ver_cut][1]**: output version substrings
-- **[ver_rs][1]**: perform version string substitutions
-- **[ver_test][1]**: perform version comparisons
+- **has**: determine if a string is in a list of strings
+- **ver_cut**: output version substrings
+- **ver_rs**: perform version string substitutions
+- **ver_test**: perform version comparisons
 
 ## Development
 
@@ -41,4 +43,4 @@ To build pkgcraft-bash, run the following commands:
     bash -c "enable -f build/src/ver_test.so ver_test && ver_test 1 -lt 2"
 
 
-[1]: <https://projects.gentoo.org/pms/latest/pms.html#x1-13400012.3.14>
+[1]: <https://projects.gentoo.org/pms/latest/pms.html>
