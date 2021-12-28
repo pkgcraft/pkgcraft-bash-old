@@ -6,7 +6,6 @@
 #include <bash/builtins/bashgetopt.h>
 #include <bash/shell.h>
 #include <bash/builtins/common.h>
-#include "input.h"
 
 char *str_join(const char *separator, char **str_array)
 {
@@ -95,7 +94,7 @@ static int profile_builtin(WORD_LIST *list)
 
     start = clock();
     for (i = 0; i < loops; i++) {
-	execute_variable_command(cmd, "-c");
+	parse_and_execute(cmd, "-c", SEVAL_NONINT|SEVAL_NOHIST|SEVAL_NOFREE);
     }
     end = clock();
 
