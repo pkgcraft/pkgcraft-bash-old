@@ -30,7 +30,6 @@ static int profile_builtin(WORD_LIST *list)
 {
     char **args;
     char *cmd_str;
-    COMMAND *volatile command;
     char *loops_end = NULL;
     char *units = NULL;
     clock_t start, end;
@@ -74,18 +73,15 @@ static int profile_builtin(WORD_LIST *list)
 	goto exit;
     }
 
-    // get parsed command and modify it
-    command = global_command;
-    command->flags |= (CMD_NO_FORK|CMD_IGNORE_RETURN|CMD_FORCE_SUBSHELL);
-
     start = clock();
     for (i = 0; i < loops; i++) {
-	execute_command(command);
+	execute_command(global_command);
     }
     end = clock();
 
     // clean up command
-    dispose_command(command);
+    dispose_command(global_command);
+    global_command = (COMMAND *)NULL;
 
     elapsed = (double)(end - start) / CLOCKS_PER_SEC;
     determine_units(elapsed, &d_time, &units);
