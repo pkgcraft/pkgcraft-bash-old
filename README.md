@@ -7,10 +7,16 @@ Manager Specification][1] used by Gentoo.
 
 ## Plugins
 
+### Pkgcraft (requires pkgcraft-c library)
+
 - **has**: determine if a string is in a list of strings
 - **ver_cut**: output version substrings
 - **ver_rs**: perform version string substitutions
 - **ver_test**: perform version comparisons
+
+### Bash
+
+- **profile**: benchmark bash functions
 
 ## Development
 
