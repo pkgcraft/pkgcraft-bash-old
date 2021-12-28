@@ -64,6 +64,7 @@ static int profile_builtin(WORD_LIST *list)
     clock_t start, end;
     double elapsed, d_time;
     int i, opt;
+    int ret = 0;
     unsigned int loops = 10000;
 
     reset_internal_getopt();
@@ -92,6 +93,10 @@ static int profile_builtin(WORD_LIST *list)
     cmd = str_join(" ", args);
     free(args);
 
+    // verify the command runs before starting loop
+    ret = parse_and_execute(cmd, "-c", SEVAL_NONINT|SEVAL_NOHIST|SEVAL_NOFREE);
+    if (ret != 0) goto exit;
+
     start = clock();
     for (i = 0; i < loops; i++) {
 	parse_and_execute(cmd, "-c", SEVAL_NONINT|SEVAL_NOHIST|SEVAL_NOFREE);
@@ -103,9 +108,10 @@ static int profile_builtin(WORD_LIST *list)
     fprintf(stderr, "Processor time: %.2f %s\n", d_time, units);
     determine_units(elapsed / loops, &d_time, &units);
     fprintf(stderr, "Average per loop: %.2f %s\n", d_time, units);
-    free(cmd);
 
-    return 0;
+exit:
+    free(cmd);
+    return ret;
 }
 
 static char *profile_doc[] = {
