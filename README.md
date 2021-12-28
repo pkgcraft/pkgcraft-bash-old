@@ -28,25 +28,42 @@ development files (.pc and headers) available on the system.
 
 To build pkgcraft-bash, run the following commands:
 
-    # install cargo-c
-    cargo install cargo-c
+```bash
+# install cargo-c
+cargo install cargo-c
 
-    # clone repos
-    git clone https://github.com/pkgcraft/pkgcraft.git
-    git clone https://github.com/pkgcraft/pkgcraft-c.git
-    git clone https://github.com/pkgcraft/pkgcraft-bash.git
+# clone repos
+git clone https://github.com/pkgcraft/pkgcraft.git
+git clone https://github.com/pkgcraft/pkgcraft-c.git
+git clone https://github.com/pkgcraft/pkgcraft-bash.git
 
-    cd pkgcraft-bash
+cd pkgcraft-bash
 
-    # build and install pkgcraft-c
-    cargo cinstall --prefix="${PWD}/pkgcraft" --pkgconfigdir="${PWD}/pkgcraft" --manifest-path=../pkgcraft-c/Cargo.toml
+# build and install pkgcraft-c
+cargo cinstall --prefix="${PWD}/pkgcraft" --pkgconfigdir="${PWD}/pkgcraft" --manifest-path=../pkgcraft-c/Cargo.toml
 
-    # build pkgcraft-bash
-    export PKG_CONFIG_PATH=pkgcraft
-    meson setup build && meson compile -C build -v
+# build pkgcraft-bash
+export PKG_CONFIG_PATH=pkgcraft
+meson setup build && meson compile -C build -v
+```
 
-    # bash plugin loading example
-    bash -c "enable -f build/src/ver_test.so ver_test && ver_test 1 -lt 2"
+## Usage
 
+Plugin usage varies depending on what the plugin is meant for. See the
+following example using the **profile** plugin to benchmark the **ver_test**
+plugin vs its native implementation.
+
+```bash
+# load plugins
+enable -f build/src/profile.so profile
+enable -f build/src/ver_test.so ver_test
+
+# profile ver_test plugin that uses pkgcraft
+profile ver_test 1.2.3.4.5 -lt 1.2.3.4.5_p
+
+# profile ver_test bash implementation
+source benches/pkgcore.bash
+profile ver_test 1.2.3.4.5 -lt 1.2.3.4.5_p
+```
 
 [1]: <https://projects.gentoo.org/pms/latest/pms.html>
