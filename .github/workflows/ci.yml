@@ -48,7 +48,6 @@ jobs:
           ~/.cargo/registry/index/
           ~/.cargo/registry/cache/
           ~/.cargo/git/db/
-          ~/.cache/pip
           target/
         key: ${{ matrix.os }}-rust-${{ matrix.rust-version}}-cargo-${{ hashFiles('Cargo.lock') }}
         restore-keys: ${{ matrix.os }}-rust-${{ matrix.rust-version}}-cargo-
@@ -73,9 +72,7 @@ jobs:
       run: pip install meson
 
     - name: Install ninja and bash plugin support
-      run: |
-        sudo apt update
-        sudo apt install -y ninja-build bash-builtins
+      run: sudo apt install -y ninja-build bash-builtins
 
     - name: Build bash plugins
       run: |
