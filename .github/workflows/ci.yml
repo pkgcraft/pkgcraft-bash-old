@@ -47,7 +47,8 @@ jobs:
           ~/.cargo/registry/index/
           ~/.cargo/registry/cache/
           ~/.cargo/git/db/
-          ../pkgcraft-c/target/
+          ~/.cache/pip
+          target/
         key: ${{ matrix.os }}-rust-${{ matrix.rust-version}}-cargo-${{ hashFiles('Cargo.lock') }}
         restore-keys: ${{ matrix.os }}-rust-${{ matrix.rust-version}}-cargo-
 
@@ -63,7 +64,7 @@ jobs:
       run: cargo install cargo-c
 
     - name: Build C library
-      run: cargo cinstall --prefix=${PWD}/pkgcraft --pkgconfigdir=${PWD}/pkgcraft --manifest-path=../pkgcraft-c/Cargo.toml
+      run: cargo cinstall --prefix=${PWD}/pkgcraft --pkgconfigdir=${PWD}/pkgcraft --manifest-path=../pkgcraft-c/Cargo.toml --target-dir target
 
     - name: Install meson
       run: pip install meson
