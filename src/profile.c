@@ -101,9 +101,9 @@ static int profile_builtin(WORD_LIST *list)
 
     elapsed = (double)(end - start) / CLOCKS_PER_SEC;
     determine_units(elapsed, &d_time, &units);
-    fprintf(stderr, "Elapsed time: %.2f %s\n", d_time, units);
+    fprintf(stderr, "Processor time: %.2f %s\n", d_time, units);
     determine_units(elapsed / loops, &d_time, &units);
-    fprintf(stderr, "Average command run time: %.2f %s\n", d_time, units);
+    fprintf(stderr, "Average per loop: %.2f %s\n", d_time, units);
     free(cmd);
 
     return 0;
