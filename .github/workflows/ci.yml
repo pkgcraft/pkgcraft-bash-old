@@ -41,6 +41,9 @@ jobs:
         override: true
         components: rustfmt
 
+    - name: Update deps
+      run: cargo update --manifest-path=../pkgcraft-c/Cargo.toml
+
     - name: Set up rust cache
       uses: Swatinem/rust-cache@v1
       with:
