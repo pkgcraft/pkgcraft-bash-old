@@ -1,0 +1,13 @@
+#!/bin/sh
+# Build the project.
+#
+# Note: This must be run from the root directory of the repository.
+# Also, the required setup must be completed before using this script, see the readme for details.
+
+# build and install pkgcraft-c
+rm -rf build && mkdir build
+cargo cinstall --prefix="${PWD}/build/pkgcraft" --pkgconfigdir="${PWD}/build/pkgcraft" --manifest-path=../pkgcraft-c/Cargo.toml
+
+# build pkgcraft-bash
+export PKG_CONFIG_PATH=build/pkgcraft
+meson setup build && meson compile -C build -v

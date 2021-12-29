@@ -37,14 +37,9 @@ git clone https://github.com/pkgcraft/pkgcraft.git
 git clone https://github.com/pkgcraft/pkgcraft-c.git
 git clone https://github.com/pkgcraft/pkgcraft-bash.git
 
+# build plugins
 cd pkgcraft-bash
-
-# build and install pkgcraft-c
-cargo cinstall --prefix="${PWD}/pkgcraft" --pkgconfigdir="${PWD}/pkgcraft" --manifest-path=../pkgcraft-c/Cargo.toml
-
-# build pkgcraft-bash
-export PKG_CONFIG_PATH=pkgcraft
-meson setup build && meson compile -C build -v
+./scripts/build
 ```
 
 ## Usage
