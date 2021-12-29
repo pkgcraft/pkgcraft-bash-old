@@ -49,8 +49,8 @@ jobs:
           ~/.cargo/registry/cache/
           ~/.cargo/git/db/
           target/
-        key: ${{ matrix.os }}-rust-${{ matrix.rust-version}}-cargo-${{ hashFiles('Cargo.lock') }}
-        restore-keys: ${{ matrix.os }}-rust-${{ matrix.rust-version}}-cargo-
+        key: v1-${{ matrix.os }}-rust-${{ matrix.rust-version }}-cargo-${{ hashFiles('Cargo.lock') }}
+        restore-keys: v1-${{ matrix.os }}-rust-${{ matrix.rust-version }}-cargo-
 
     - name: Set up rust toolchain ${{ matrix.rust-version }}
       uses: actions-rs/toolchain@v1
