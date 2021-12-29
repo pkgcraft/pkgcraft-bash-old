@@ -54,11 +54,11 @@ enable -f build/src/profile.so profile
 enable -f build/src/ver_test.so ver_test
 
 # profile ver_test plugin that uses pkgcraft
-profile ver_test 1.2.3.4.5 -lt 1.2.3.4.5_p
+profile ver_test 1.2.3 -lt 1.2.3_p
 
 # profile ver_test bash implementation
 source benches/pkgcore.bash
-profile ver_test 1.2.3.4.5 -lt 1.2.3.4.5_p
+profile ver_test 1.2.3 -lt 1.2.3_p
 ```
 
 [1]: <https://projects.gentoo.org/pms/latest/pms.html>
