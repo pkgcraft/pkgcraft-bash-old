@@ -49,12 +49,11 @@ jobs:
           ~/.cargo/registry/cache/
           ~/.cargo/git/db/
           target/
-        key: v1-${{ matrix.os }}-rust-${{ matrix.rust-version }}-cargo-${{ hashFiles('Cargo.lock') }}
-        restore-keys: v1-${{ matrix.os }}-rust-${{ matrix.rust-version }}-cargo-
+        key: v2-${{ matrix.os }}-rust-${{ matrix.rust-version }}-cargo-${{ hashFiles('Cargo.lock') }}
+        restore-keys: v2-${{ matrix.os }}-rust-${{ matrix.rust-version }}-cargo-
 
     - name: Set up rust toolchain ${{ matrix.rust-version }}
       uses: actions-rs/toolchain@v1
-      if: steps.cache.outputs.cache-hit != 'true'
       with:
         toolchain: ${{ matrix.rust-version }}
         profile: minimal
