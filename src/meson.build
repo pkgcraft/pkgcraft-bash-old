@@ -1,4 +1,4 @@
-pkgcraft_plugins = ['has', 'hasv', 'ver_cut', 'ver_rs', 'ver_test']
+pkgcraft_plugins = ['ver_cut', 'ver_rs', 'ver_test']
 foreach name : pkgcraft_plugins
   shared_module(
     name, f'@name@.c', name_prefix : '', install : true,
