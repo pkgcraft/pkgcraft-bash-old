@@ -48,24 +48,24 @@ static int profile_builtin(WORD_LIST *list)
 
 	reset_internal_getopt();
 	while ((opt = internal_getopt(list, "n:s:")) != -1) {
-	switch (opt) {
-		case 'n':
-			loops = strtol(list_optarg, &endptr, 10);
-			if (*endptr != '\0') {
-				builtin_error("-n: option requires an integer argument");
+		switch (opt) {
+			case 'n':
+				loops = strtol(list_optarg, &endptr, 10);
+				if (*endptr != '\0') {
+					builtin_error("-n: option requires an integer argument");
+					return EX_USAGE;
+				}
+				break;
+			case 's':
+				loop_time = strtol(list_optarg, &endptr, 10);
+				if (*endptr != '\0') {
+					builtin_error("-s: option requires an integer argument");
+					return EX_USAGE;
+				}
+				break;
+			default:
+				builtin_usage();
 				return EX_USAGE;
-			}
-			break;
-		case 's':
-			loop_time = strtol(list_optarg, &endptr, 10);
-			if (*endptr != '\0') {
-				builtin_error("-s: option requires an integer argument");
-				return EX_USAGE;
-			}
-			break;
-		default:
-			builtin_usage();
-			return EX_USAGE;
 		}
 	}
 
